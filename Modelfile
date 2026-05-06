@@ -1,11 +1,8 @@
 FROM qwen2.5-coder:14b-instruct-q4_K_M
 
 # --- ПАРАМЕТРЫ ПРОИЗВОДИТЕЛЬНОСТИ ---
-PARAMETER num_ctx 32768
+PARAMETER num_ctx 16384
 PARAMETER num_predict 4096
-PARAMETER num_gpu 1
-PARAMETER num_thread 16
-PARAMETER main_gpu 0
 
 # Фишки для скорости (удержание в памяти)
 PARAMETER use_mmap true

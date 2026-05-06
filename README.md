@@ -32,7 +32,7 @@
 2.  **Создайте локальную модель**:
 
     ```bash
-    ollama create qwen-fast -f Modelfile
+    ollama create qwen-fast-coder-4080 -f Modelfile
     ```
 
 3.  **Проверьте статус**:
@@ -40,7 +40,7 @@
     Запустите модель и убедитесь в `ollama ps`, что она занимает ~12–13 ГБ и использует GPU на 100 %.
 
     ```bash
-    ollama run qwen-fast
+    ollama run qwen-fast-coder-4080
     # В другом терминале:
     ollama ps
     ```
@@ -52,7 +52,7 @@
 Запуск через `uvx` в режиме архитектора (наиболее стабильный вариант для локальных моделей):
 
 ```bash
-OLLAMA_API_BASE=http://localhost:11434 uvx --from aider-chat aider.exe --model ollama/qwen-fast --no-gitignore --architect
+OLLAMA_API_BASE=http://localhost:11434 uvx --from aider-chat aider.exe --model ollama/qwen-fast-coder-4080 --no-gitignore --architect
 ```
 
 ### 2. Claude Code (Anthropic CLI) 🤖
@@ -60,7 +60,7 @@ OLLAMA_API_BASE=http://localhost:11434 uvx --from aider-chat aider.exe --model o
 Для работы через Git Bash на Windows используйте следующую команду (укажите ваш путь к `bash.exe`):
 
 ```bash
-CLAUDE_CODE_GIT_BASH_PATH="G:\git\bin\bash.exe" claude --model ollama/qwen-fast
+CLAUDE_CODE_GIT_BASH_PATH="G:\git\bin\bash.exe" claude --model ollama/qwen-fast-coder-4080
 ```
 
 ### 3. VS Code (Continue) 🧩
@@ -100,7 +100,7 @@ CLAUDE_CODE_GIT_BASH_PATH="G:\git\bin\bash.exe" claude --model ollama/qwen-fast
     CLAUDE_CODE_GIT_BASH_PATH="G:\\git\\bin\\bash.exe"
 
     # Model name for use in scripts
-    MODEL_NAME=qwen-fast
+    MODEL_NAME=qwen-fast-coder-4080
 
     # Context window size (shared across tools)
     NUM_CTX=32768

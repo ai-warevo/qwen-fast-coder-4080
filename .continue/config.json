@@ -1,0 +1,58 @@
+{
+  "models": [
+    {
+      "title": "Qwen Fast Coder (Spec-Kit Optimized)",
+      "provider": "ollama",
+      "model": "qwen-fast",
+      "systemMessage": "You are an elite Senior Fullstack Developer and Spec-Kit Master. Follow the Spec-Driven Development (SDD) methodology strictly. At each stage, adhere to the specific instructions below:\n\n1. CONSTITUTION: Define core principles, constraints, and non-negotiables for the project.\n2. SPECIFY: Clearly state WHAT needs to be built and WHY (business/technical requirements).\n3. CLARIFY: Identify and resolve ambiguities, edge cases, and potential risks.\n4. PLAN: Create a technical architecture, including:\n   - High-level design\n   - Tech stack selection\n   - Data flow diagrams\n   - API contracts (if applicable)\n5. CHECKLIST: Break the plan into a numbered checklist of verifiable steps.\n6. TASKS: Break each checklist item into actionable, atomic tasks.\n7. ANALYZE: Review the current state, identify bottlenecks, and suggest optimizations.\n8. IMPLEMENT: Write clean, efficient code. Always wrap code in triple backticks with language specification.\n\nCRITICAL RULES:\n- Always respond in the context of the current Spec-Kit stage.\n- For IMPLEMENT stage: Use modern standards (C# 12/.NET 8 if applicable), follow SOLID/DRY principles.\n- Output must be actionable and ready for execution.\n- If a stage is incomplete, do not proceed to the next one without confirmation.",
+      "requestOptions": {
+        "numPredict": 4096,
+        "numCtx": 32768,
+        "temperature": 0.1,
+        "top_p": 0.9,
+        "repeat_penalty": 1.15,
+        "frequency_penalty": 0.3
+      }
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen Coder 1.5B (⚡ Fast Autocomplete)",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:1.5b"
+  },
+  "tabAutocompleteOptions": {
+    "useCopyBuffer": true,
+    "maxPromptTokens": 1024,
+    "debounceDelay": 75,
+    "maxSuffixPercentage": 0.2
+  },
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text"
+  },
+  "slashCommands": [
+    { "name": "speckit.constitution", "description": "Define project principles and constraints" },
+    { "name": "speckit.specify", "description": "Define WHAT and WHY (Requirements)" },
+    { "name": "speckit.clarify", "description": "Identify and resolve ambiguities" },
+    { "name": "speckit.plan", "description": "Create technical architecture and plan" },
+    { "name": "speckit.checklist", "description": "Break plan into verifiable checklist" },
+    { "name": "speckit.tasks", "description": "Break down checklist into actionable tasks" },
+    { "name": "speckit.analyze", "description": "Review and analyze current state" },
+    { "name": "speckit.implement", "description": "Execute tasks and write code" },
+    { "name": "edit", "description": "Edit selected code" },
+    { "name": "fix", "description": "Fix errors in code" }
+  ],
+  "contextProviders": [
+    { "name": "code", "params": {} },
+    { "name": "docs", "params": {} },
+    { "name": "diff", "params": {} },
+    { "name": "terminal", "params": {} },
+    { "name": "file", "params": {} },
+    { "name": "folder", "params": {} }
+  ],
+  "ui": {
+    "codeBlockRenderMode": "preview",
+    "displayFilesAsContext": true,
+    "fontSize": 14
+  }
+}

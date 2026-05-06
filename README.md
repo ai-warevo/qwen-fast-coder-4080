@@ -49,7 +49,7 @@
 
 Запуск через `uvx` в режиме архитектора (наиболее стабильный вариант для локальных моделей):
 ```bash
-OLLAMA_API_BASE=http://localhost:11434 uvx --from aider-chat aider.exe --model qwen-fast-coder-4080 --no-gitignore --architect
+OLLAMA_API_BASE=http://localhost:11434 uvx --from aider-chat aider.exe --model ollama/qwen-fast-coder-4080 --no-gitignore --architect
 ```
 
 ### 2. Claude Code (Anthropic CLI) 🤖
@@ -105,7 +105,7 @@ CLAUDE_CODE_GIT_BASH_PATH="G:\git\bin\bash.exe" claude --model qwen-fast-coder-4
     CLAUDE_CODE_GIT_BASH_PATH="G:\\git\\bin\\bash.exe"
 
     # Model name for use in scripts
-    MODEL_NAME=qwen-fast-coder-4080
+    MODEL_NAME=ollama/qwen-fast-coder-4080
 
     # Context window size (shared across tools)
     NUM_CTX=32768
@@ -127,7 +127,7 @@ CLAUDE_CODE_GIT_BASH_PATH="G:\git\bin\bash.exe" claude --model qwen-fast-coder-4
     source .env
 
     $OLLAMA_API_BASE uvx --from aider-chat aider.exe \
-      --model $MODEL_NAME \
+      --model ollama/$MODEL_NAME \
       --no-gitignore \
       --architect
     ```

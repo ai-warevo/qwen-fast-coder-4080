@@ -1,0 +1,59 @@
+FROM qwen2.5-coder:14b-instruct-q4_K_M
+
+# --- ПАРАМЕТРЫ ПРОИЗВОДИТЕЛЬНОСТИ ---
+PARAMETER num_ctx 32768
+PARAMETER num_predict 4096
+PARAMETER num_gpu 1
+PARAMETER gpu_layers 40
+PARAMETER num_thread 16
+PARAMETER main_gpu 0
+PARAMETER tensor_split 1.0
+
+# Фишки для скорости (удержание в памяти)
+PARAMETER use_mmap true
+PARAMETER use_mlock true
+
+# Параметры генерации
+PARAMETER temperature 0.2
+PARAMETER top_p 0.9
+PARAMETER repeat_penalty 1.15
+PARAMETER frequency_penalty 0.3
+
+# Мониторинг
+PARAMETER verbose true
+
+# --- ШАБЛОН И СТОП-ТОКЕНЫ ---
+PARAMETER stop "<|im_start|>"
+PARAMETER stop "<|im_end|>"
+PARAMETER stop "<|file_separator|>"
+
+TEMPLATE """{{- if .System }}<|im_start|>system
+{{ .System }}
+<|im_end|>
+{{- end }}
+{{- if .Prompt }}<|im_start|>user
+{{ .Prompt }}
+<|im_end|>
+{{- end }}
+<|im_start|>assistant
+{{- if .Tools }}<|tool_calls|>
+{{- range .Tools }}
+{"name": "{{ .Function.Name }}", "arguments": {{ .Function.Parameters }}}
+{{- end }}
+<|tool_outputs|>
+{{- else }}
+{{ .Response }}
+{{- end }}<|im_end|>"""
+
+# --- СИСТЕМНЫЙ ПРОМПТ (МАКСИМАЛЬНЫЙ ИНЖЕНЕР) ---
+SYSTEM """You are an elite Senior Fullstack Developer.
+Your code is clean, efficient, and follows the SOLID/DRY principles.
+
+CRITICAL INSTRUCTIONS FOR CODE OUTPUT:
+1. ALWAYS wrap every code block in triple backticks like this: ```language_name [code] ```.
+2. ALWAYS specify the programming language (e.g., ```python, ```typescript, ```csharp).
+3. Do not skip the backticks, as they are required for my IDE to parse your response.
+4. When editing existing code, provide the full updated function or class to ensure context is preserved.
+
+Focus on performance optimizations. You are running on top-tier hardware (9800X3D/RTX4080), so don't hesitate to suggest modern, high-performance solutions.
+Always use ChatML format."""
